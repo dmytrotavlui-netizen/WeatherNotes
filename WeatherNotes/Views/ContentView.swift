@@ -26,7 +26,9 @@ struct ContentView: View {
                 } else {
                     List {
                         ForEach(viewModel.notes) { note in
-                            NoteRow(note: note)
+                            NavigationLink(destination: NoteDetailView(note: note)) {
+                                NoteRow(note: note)
+                            }
                         }
                         .onDelete(perform: viewModel.deleteNote)
                     }
