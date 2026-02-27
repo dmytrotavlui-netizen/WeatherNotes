@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
     @StateObject private var viewModel = ListViewModel()
     @State private var showingAddNote = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
         NavigationStack {
@@ -37,6 +38,17 @@ struct ContentView: View {
             }
             .navigationTitle("Notes")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        withAnimation {
+                            isDarkMode.toggle()
+                        }
+                    } label: {
+                        Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .foregroundColor(isDarkMode ? .yellow : .blue)
+                    }
+                }
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddNote = true
@@ -55,6 +67,7 @@ struct ContentView: View {
                 AddNoteView()
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
