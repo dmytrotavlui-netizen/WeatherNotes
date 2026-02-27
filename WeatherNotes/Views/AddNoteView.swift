@@ -32,7 +32,17 @@ struct AddNoteView: View {
             }
             .navigationTitle("New note")
             .alert("Error", isPresented: $viewModel.showAlert) {
-                Button("OK", role: .cancel) { }
+                if viewModel.isLocationError {
+                    Button("Settings") {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    Button("Cancel", role: .cancel) { }
+                } else {
+                    Button("OK", role: .cancel) { }
+                }
+                
             } message: {
                 Text(viewModel.errorMessage ?? "Unexpected error")
             }
