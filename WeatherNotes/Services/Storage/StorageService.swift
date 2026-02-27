@@ -8,6 +8,7 @@
 import CoreData
 
 class StorageService {
+    static let shared = StorageService()
     
     private let container: NSPersistentContainer
     private var context: NSManagedObjectContext {

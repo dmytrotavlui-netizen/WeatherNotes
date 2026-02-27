@@ -8,6 +8,8 @@
 import Foundation
 
 class WeatherService {
+    static let shared = WeatherService()
+    
     private let apiKey = "ef128624f9c62c10125464e19ec5a165"
     private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
     
